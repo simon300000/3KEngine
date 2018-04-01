@@ -1,0 +1,19 @@
+{
+  "name": "3kengine",
+  "version": "0.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simon300000/3KEngine.git"
+  },
+  "author": "simon3000@163.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/simon300000/3KEngine/issues"
+  },
+  "homepage": "https://github.com/simon300000/3KEngine#readme"
+}
