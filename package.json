@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/simon300000/3KEngine.git"
   },
-  "author": "simon3000@163.com",
+  "author": "simon3000 <simon3000@163.com>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/simon300000/3KEngine/issues"
