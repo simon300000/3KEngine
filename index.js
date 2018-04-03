@@ -29,6 +29,23 @@ class engine {
   on(channel, callback) {
     this.event.on(channel, callback)
   }
+  version(v) {
+    return new Promise((resolve, reject) => {
+      if (v === undefined) {
+        this.db.get('version').then((value) => {
+          resolve(value)
+        }, e => {
+          reject(e)
+        })
+      } else {
+        this.db.put('version', v).then((v) => {
+          resolve(v)
+        }, e => {
+          reject(e)
+        })
+      }
+    })
+  }
 }
 
 module.exports = engine
