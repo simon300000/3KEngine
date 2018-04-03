@@ -1,11 +1,11 @@
 const chai = require('chai')
 const assert = chai.assert
-const engine = require('../')
+const Engine = require('../')
 
 describe('Basic', function() {
   describe('typeof', function() {
     it('module should output a function', function() {
-      assert.equal(typeof engine, 'function')
+      assert.equal(typeof Engine, 'function')
     })
   })
 })
