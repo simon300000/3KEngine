@@ -13,7 +13,7 @@ class engine {
       }, (e) => {
         if (e.notFound) {
           this.db.put('version', 0).then(() => {
-            this.emit('version', 0)
+            this.emit('init', 0)
           }, (e) => {
             throw e
           })
