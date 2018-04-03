@@ -8,7 +8,6 @@ class engine {
     level(savefile, (err, db) => {
       if (err) throw err
       this.db = db
-      this.on('')
     })
   }
   emit(channel, value) {
