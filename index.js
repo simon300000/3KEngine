@@ -8,7 +8,7 @@ class engine {
     level(savefile, (err, db) => {
       if (err) throw err
       this.db = db
-      this.db.get('version').then((data) => {
+      this.db.get('version').then(data => {
         this.emit('version', data)
       }, (e) => {
         if (e.notFound) {
@@ -32,13 +32,13 @@ class engine {
   version(v) {
     return new Promise((resolve, reject) => {
       if (v === undefined) {
-        this.db.get('version').then((value) => {
+        this.db.get('version').then(value => {
           resolve(value)
         }, e => {
           reject(e)
         })
       } else {
-        this.db.put('version', v).then((v) => {
+        this.db.put('version', v).then(v => {
           resolve(v)
         }, e => {
           reject(e)

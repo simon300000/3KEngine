@@ -17,7 +17,7 @@ describe('Test', function() {
     let story
     it('Able to new Engine() with version 0', function(done) {
       story = new Engine('myStory', './save')
-      story.on('version', (v) => {
+      story.on('version', v => {
         done(assert.equal(v, 0))
       })
     })
@@ -25,8 +25,8 @@ describe('Test', function() {
       assert.equal(typeof story, 'object')
     })
     it('The version will be 1 if changed', function(done) {
-      story.version(1).then(()=>{
-        story.version().then((v)=>{
+      story.version(1).then(() => {
+        story.version().then(v => {
           done(assert.equal(v, 1))
         })
       })
