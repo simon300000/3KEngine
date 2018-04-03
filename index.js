@@ -8,6 +8,19 @@ class engine {
     level(savefile, (err, db) => {
       if (err) throw err
       this.db = db
+      this.db.get('version').then((data) => {
+        this.emit('version', data)
+      }, (e) => {
+        if (e.notFound) {
+          this.db.put('version', 0).then(() => {
+            this.emit('version', 0)
+          }, (e) => {
+            throw e
+          })
+        } else {
+          throw e
+        }
+      })
     })
   }
   emit(channel, value) {
