@@ -24,5 +24,12 @@ describe('Test', function() {
     it('Which should be object', function() {
       assert.equal(typeof story, 'object')
     })
+    it('The version will be 1 if changed', function(done) {
+      story.version(1).then(()=>{
+        story.version().then((v)=>{
+          done(assert.equal(v, 1))
+        })
+      })
+    })
   })
 })
