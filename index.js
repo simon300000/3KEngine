@@ -59,6 +59,13 @@ class engine {
       value: array.length
     }))
   }
+  get(chapter, section) {
+    if (section === undefined) {
+      return this.db.get(`chapter_${chapter}`)
+    } else {
+      return this.db.get(`chapter_${chapter}_${section}`)
+    }
+  }
 }
 
 module.exports = engine
