@@ -46,6 +46,19 @@ class engine {
       }
     })
   }
+  put(section, array) {
+    return this.db.batch(array.map((u, i) => {
+      return {
+        type: 'put',
+        key: `section_${section}_${i}`,
+        value: u
+      }
+    }).concat({
+      type: 'put',
+      key: `section_${section}`,
+      value: array.length
+    }))
+  }
 }
 
 module.exports = engine
