@@ -47,15 +47,15 @@ class engine {
     })
   }
   put(chapter, array) {
-    return this.db.batch(array.map((u, i) => {
+    return this.db.batch(array.map((u, index) => {
       return {
         type: 'put',
-        key: `section_${chapter}_${i}`,
+        key: `chapter_${chapter}_${index}`,
         value: u
       }
     }).concat({
       type: 'put',
-      key: `section_${chapter}`,
+      key: `chapter_${chapter}`,
       value: array.length
     }))
   }
