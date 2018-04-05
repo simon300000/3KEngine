@@ -47,32 +47,26 @@ class engine {
     })
   }
   put(chapter, array) {
-    return this.db.batch(array.map((u, index) => {
-      return {
+    return this.db.batch(
+      [{
         type: 'put',
-        key: `chapter_${chapter}_${index}`,
-        value: JSON.stringify(u)
-      }
-    }).concat({
-      type: 'put',
-      key: `chapter_${chapter}`,
-      value: JSON.stringify(array.length)
-    }))
+        key: `chapter_${chapter}_0`,
+        value: JSON.stringify(array.length)
+      }].concat(array.map((u, index) => {
+        return {
+          type: 'put',
+          key: `chapter_${chapter}_${index + 1}`,
+          value: JSON.stringify(u)
+        }
+      })))
   }
   get(chapter, index) {
-    if (index === undefined) {
-      return new Promise((resolve, reject) => {
-        this.db.get(`chapter_${chapter}`).then(v => {
-          resolve(JSON.parse(v))
-        }, reject)
-      })
-    } else {
-      return new Promise((resolve, reject) => {
-        this.db.get(`chapter_${chapter}_${index}`).then(v => {
-          resolve(JSON.parse(v))
-        }, reject)
-      })
-    }
+    index = index || 0
+    return new Promise((resolve, reject) => {
+      this.db.get(`chapter_${chapter}_${index}`).then(v => {
+        resolve(JSON.parse(v))
+      }, reject)
+    })
   }
 }
 
