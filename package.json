@@ -4,8 +4,10 @@
   "description": "none",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --reporter=landing",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test": "eslint . && nyc mocha --reporter=landing",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint .",
+    "eslint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
