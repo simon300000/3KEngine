@@ -55,4 +55,11 @@ describe('Test', function() {
       })
     })
   })
+  describe('Player', function() {
+    it('there should be no player when story is just created', function(done) {
+      story.getPlayers().then(v => {
+        done(assert.equal(v.length, 0))
+      })
+    })
+  })
 })
