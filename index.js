@@ -51,19 +51,27 @@ class engine {
       return {
         type: 'put',
         key: `chapter_${chapter}_${index}`,
-        value: u
+        value: JSON.stringify(u)
       }
     }).concat({
       type: 'put',
       key: `chapter_${chapter}`,
-      value: array.length
+      value: JSON.stringify(array.length)
     }))
   }
   get(chapter, index) {
     if (index === undefined) {
-      return this.db.get(`chapter_${chapter}`)
+      return new Promise((resolve, reject) => {
+        this.db.get(`chapter_${chapter}`).then(v => {
+          resolve(JSON.parse(v))
+        }, reject)
+      })
     } else {
-      return this.db.get(`chapter_${chapter}_${index}`)
+      return new Promise((resolve, reject) => {
+        this.db.get(`chapter_${chapter}_${index}`).then(v => {
+          resolve(JSON.parse(v))
+        }, reject)
+      })
     }
   }
 }
