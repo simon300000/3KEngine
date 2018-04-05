@@ -34,7 +34,7 @@ describe('Test', function() {
   })
   describe('Story', function() {
     it('We could insert story to some chapter', function insert(done) {
-      story.put('one', [{
+      story.putChapter('one', [{
         Simon: 'What is your name?'
       }, {
         Andrew: 'My name is Andrew.'
@@ -45,12 +45,12 @@ describe('Test', function() {
       }]).then(done)
     })
     it('And we could get the correct chapter menu', function(done) {
-      story.get('one').then(menu => {
+      story.getChapter('one').then(menu => {
         done(assert.equal(menu, 4))
       })
     })
     it('And we could get the corrct chapter based on index', function(done) {
-      story.get('one', 2).then(v => {
+      story.getChapter('one', 2).then(v => {
         done(assert.equal(v.Andrew, 'My name is Andrew.'))
       })
     })

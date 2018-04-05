@@ -26,7 +26,7 @@ class engine {
       }
     })
   }
-  put(chapter, array) {
+  putChapter(chapter, array) {
     return this.db.batch(
       [{
         type: 'put',
@@ -40,7 +40,7 @@ class engine {
         }
       })))
   }
-  get(chapter, index) {
+  getChapter(chapter, index) {
     index = index || 0
     return new Promise(async (resolve, reject) => {
       resolve(await this.db.get(`chapter_${chapter}_${index}`))
