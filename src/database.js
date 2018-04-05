@@ -6,7 +6,9 @@ module.exports = (database, call) => {
     let dbInstance = {
       get: key => {
         return new Promise((resolve, reject) => {
-          db.get(key).then(resolve, (e) => {
+          db.get(key).then(value => {
+            resolve(JSON.parse(value))
+          }, (e) => {
             throw e
           })
         })

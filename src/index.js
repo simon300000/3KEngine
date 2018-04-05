@@ -49,9 +49,7 @@ class engine {
   get(chapter, index) {
     index = index || 0
     return new Promise((resolve, reject) => {
-      this.db.get(`chapter_${chapter}_${index}`).then(v => {
-        resolve(JSON.parse(v))
-      }, reject)
+      this.db.get(`chapter_${chapter}_${index}`).then(resolve, reject)
     })
   }
 }
