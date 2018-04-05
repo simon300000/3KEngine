@@ -35,13 +35,13 @@ describe('Test', function() {
   describe('Story', function() {
     it('We could insert story to some chapter', function insert(done) {
       story.put('one', [{
-        'Simon': 'What is your name?'
+        Simon: 'What is your name?'
       }, {
-        'Andrew': 'My name is Andrew.'
+        Andrew: 'My name is Andrew.'
       }, {
-        'Simon': 'Nice to meet you.'
+        Simon: 'Nice to meet you.'
       }, {
-        'Andrew': 'Nice to meet you too.'
+        Andrew: 'Nice to meet you too.'
       }]).then(done)
     })
     it('And we could read the story menu', function() {
