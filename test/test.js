@@ -59,5 +59,38 @@ describe('Test', function() {
       let v = await story.getPlayers()
       assert.equal(v.length, 0)
     })
+    let id
+    it('The first player will have id of 0', async function() {
+      id = await story.newPlayer()
+      assert.equal(id, 0)
+    })
+    it('We could insert some data to this player 0', async function() {
+      await story.setPlayer(id, {
+        name: 'Simon'
+      })
+    })
+    it('There should be one player now', async function() {
+      let v = await story.getPlayers()
+      assert.equal(v.length, 1)
+    })
+    it('And we could get the data save in player 0', async function() {
+      let player = await story.getPlayer(id)
+      assert.equal(player.name, 'Simon')
+    })
+    it('The second player will have id of 1', async function() {
+      let secondId = await story.newPlayer()
+      assert.equal(secondId, 1)
+    })
+    it('And we could delete player 0', async function() {
+      await story.delPlayer(id)
+    })
+    it('The player id will go back to 0 since we deleted that player', async function() {
+      let secondId = await story.newPlayer()
+      assert.equal(secondId, 0)
+    })
+    it('The player list of player id 0 should be false now', async function() {
+      let v = await story.getPlayers()
+      assert.equal(v[0], false)
+    })
   })
 })
