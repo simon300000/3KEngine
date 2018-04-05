@@ -8,9 +8,7 @@ class engine {
     this.event = new EventEmitter()
     level(savefile, async (db) => {
       this.db = db
-      this.db.get('version').then(data => {
-        this.emit('version', data)
-      })
+      this.emit('version', await this.db.get('version'))
     })
   }
   emit(channel, value) {
@@ -20,15 +18,11 @@ class engine {
     this.event.on(channel, callback)
   }
   version(v) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (v === undefined) {
-        this.db.get('version').then(value => {
-          resolve(value)
-        })
+        resolve(await this.db.get('version'))
       } else {
-        this.db.put('version', v).then(v => {
-          resolve(v)
-        })
+        resolve(await this.db.put('version', v))
       }
     })
   }
@@ -48,8 +42,8 @@ class engine {
   }
   get(chapter, index) {
     index = index || 0
-    return new Promise((resolve, reject) => {
-      this.db.get(`chapter_${chapter}_${index}`).then(resolve, reject)
+    return new Promise(async (resolve, reject) => {
+      resolve(await this.db.get(`chapter_${chapter}_${index}`))
     })
   }
 }
