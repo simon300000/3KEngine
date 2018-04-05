@@ -1,7 +1,7 @@
 const level = require('level')
 
-module.exports = (database, call) => {
-  level(database, (err, db) => {
+module.exports = (file, call) => {
+  level(file, (err, db) => {
     if (err) throw err
     let dbInstance = {
       get: key => {
