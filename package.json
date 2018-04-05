@@ -4,7 +4,8 @@
   "description": "none",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && nyc mocha --reporter=landing",
+    "test": "npm run lint && npm run unit",
+    "unit": "nyc mocha --reporter=landing",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint .",
     "eslint": "eslint . --fix"
