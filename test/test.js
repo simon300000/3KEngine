@@ -33,7 +33,7 @@ describe('Test', function() {
     })
   })
   describe('Story', function() {
-    it('We could insert story to some chapter', function insert(done) {
+    it('We could insert story to some chapter', function(done) {
       story.putChapter('one', [{
         Simon: 'What is your name?'
       }, {
