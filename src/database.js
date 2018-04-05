@@ -32,11 +32,15 @@ module.exports = (database, call) => {
       call(dbInstance)
     }, (e) => {
       if (e.notFound) {
-        db.put('version', 0).then(() => {
-          call(dbInstance)
-        }, (e) => {
-          throw e
-        })
+        db.batch()
+          .put('version', JSON.stringify(0))
+          .put('player', JSON.stringify([]))
+          .write()
+          .then(() => {
+            call(dbInstance)
+          }, (e) => {
+            throw e
+          })
       } else {
         throw e
       }

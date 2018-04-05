@@ -46,6 +46,37 @@ class engine {
       resolve(await this.db.get(`chapter_${chapter}_${index}`))
     })
   }
+  getPlayer(index) {
+    return new Promise(async (resolve, reject) => {
+      resolve(await this.db.get(`player_${index}`))
+    })
+  }
+  setPlayer(index, value) {
+    return new Promise(async (resolve, reject) => {
+      let playerList = await this.db.get('player')
+      playerList[index] = true
+      await this.db.put('player', playerList)
+      resolve(await this.db.put(`player_${index}`, value))
+    })
+  }
+  delPlayer(index) {
+    return new Promise(async (resolve, reject) => {
+      let playerList = await this.db.get('player')
+      playerList[index] = false
+      resolve(await this.db.put('player', playerList))
+    })
+  }
+  newPlayer() {
+    return new Promise(async (resolve, reject) => {
+      let playerList = await this.db.get('player')
+      for (let i = 0; i < playerList.length; i++) {
+        if (!playerList[i]) {
+          resolve(i)
+        }
+      }
+      resolve(playerList.length)
+    })
+  }
 }
 
 module.exports = engine
