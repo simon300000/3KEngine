@@ -59,11 +59,11 @@ class engine {
       value: array.length
     }))
   }
-  get(chapter, section) {
-    if (section === undefined) {
+  get(chapter, index) {
+    if (index === undefined) {
       return this.db.get(`chapter_${chapter}`)
     } else {
-      return this.db.get(`chapter_${chapter}_${section}`)
+      return this.db.get(`chapter_${chapter}_${index}`)
     }
   }
 }
