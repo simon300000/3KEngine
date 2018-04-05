@@ -22,7 +22,9 @@ module.exports = (file, call) => {
       },
       put: (key, value) => {
         return new Promise((resolve, reject) => {
-          db.put(key, JSON.stringify(value)).then(resolve, (e) => {
+          db.put(key, JSON.stringify(value)).then(() => {
+            resolve(value)
+          }, (e) => {
             throw e
           })
         })
