@@ -51,6 +51,11 @@ class engine {
       resolve(await this.db.get(`player_${index}`))
     })
   }
+  getPlayers() {
+    return new Promise(async (resolve, reject) => {
+      resolve(await this.db.get(`player`))
+    })
+  }
   setPlayer(index, value) {
     return new Promise(async (resolve, reject) => {
       let playerList = await this.db.get('player')
