@@ -44,10 +44,15 @@ describe('Test', function() {
         Andrew: 'Nice to meet you too.'
       }]).then(done)
     })
-    it('And we could read the story menu', function() {
-      //story.get('one').then(menu=>{
-      //  console.log(typeof menu)
-      //})
+    it('And we could get the correct chapter menu', function(done) {
+      story.get('one').then(menu => {
+        done(assert.equal(menu, 4))
+      })
+    })
+    it('And we could get the corrct chapter based on index', function(done) {
+      story.get('one', 1).then(v => {
+        done(assert.equal(v.Andrew,'My name is Andrew.'))
+      })
     })
   })
 })
