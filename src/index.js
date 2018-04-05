@@ -1,25 +1,15 @@
-const level = require('level')
 const EventEmitter = require('events').EventEmitter
+
+const level = require('./database')
 
 class engine {
   constructor(name, savefile) {
     this.name = name
     this.event = new EventEmitter()
-    level(savefile, (err, db) => {
-      if (err) throw err
+    level(savefile, async (db) => {
       this.db = db
       this.db.get('version').then(data => {
         this.emit('version', data)
-      }, (e) => {
-        if (e.notFound) {
-          this.db.put('version', 0).then(() => {
-            this.emit('init', 0)
-          }, (e) => {
-            throw e
-          })
-        } else {
-          throw e
-        }
       })
     })
   }
@@ -34,14 +24,10 @@ class engine {
       if (v === undefined) {
         this.db.get('version').then(value => {
           resolve(value)
-        }, e => {
-          reject(e)
         })
       } else {
         this.db.put('version', v).then(v => {
           resolve(v)
-        }, e => {
-          reject(e)
         })
       }
     })

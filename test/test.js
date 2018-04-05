@@ -17,7 +17,7 @@ describe('Test', function() {
     })
     it('Able to new Engine() with version 0', function(done) {
       story = new Engine('myStory', './save')
-      story.on('init', v => {
+      story.on('version', v => {
         done(assert.equal(v, 0))
       })
     })
