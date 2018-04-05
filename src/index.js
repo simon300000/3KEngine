@@ -18,13 +18,13 @@ class engine {
     this.event.on(channel, callback)
   }
   version(v) {
-    return new Promise(async (resolve, reject) => {
+    return (async () => {
       if (v === undefined) {
-        resolve(await this.db.get('version'))
+        return this.db.get('version')
       } else {
-        resolve(await this.db.put('version', v))
+        return this.db.put('version', v)
       }
-    })
+    })()
   }
   putChapter(chapter, array) {
     return this.db.batch(
@@ -42,45 +42,45 @@ class engine {
   }
   getChapter(chapter, index) {
     index = index || 0
-    return new Promise(async (resolve, reject) => {
-      resolve(await this.db.get(`chapter_${chapter}_${index}`))
-    })
+    return (async () => {
+      return this.db.get(`chapter_${chapter}_${index}`)
+    })()
   }
   getPlayer(index) {
-    return new Promise(async (resolve, reject) => {
-      resolve(await this.db.get(`player_${index}`))
-    })
+    return (async () => {
+      return this.db.get(`player_${index}`)
+    })()
   }
   getPlayers() {
-    return new Promise(async (resolve, reject) => {
-      resolve(await this.db.get(`player`))
-    })
+    return (async () => {
+      return this.db.get(`player`)
+    })()
   }
   setPlayer(index, value) {
-    return new Promise(async (resolve, reject) => {
+    return (async () => {
       let playerList = await this.db.get('player')
       playerList[index] = true
       await this.db.put('player', playerList)
-      resolve(await this.db.put(`player_${index}`, value))
-    })
+      return this.db.put(`player_${index}`, value)
+    })()
   }
   delPlayer(index) {
-    return new Promise(async (resolve, reject) => {
+    return (async () => {
       let playerList = await this.db.get('player')
       playerList[index] = false
-      resolve(await this.db.put('player', playerList))
-    })
+      return this.db.put('player', playerList)
+    })()
   }
   newPlayer() {
-    return new Promise(async (resolve, reject) => {
+    return (async () => {
       let playerList = await this.db.get('player')
       for (let i = 0; i < playerList.length; i++) {
         if (!playerList[i]) {
-          resolve(i)
+          return i
         }
       }
-      resolve(playerList.length)
-    })
+      return playerList.length
+    })()
   }
 }
 
