@@ -1,4 +1,4 @@
-# 3KEngine [![Build Status](https://travis-ci.org/simon300000/3KEngine.svg?branch=develop)](https://travis-ci.org/simon300000/3KEngine) [![Coverage Status](https://coveralls.io/repos/github/simon300000/3KEngine/badge.svg?branch=develop)](https://coveralls.io/github/simon300000/3KEngine?branch=develop)
+# 3KEngine [![Build Status](https://travis-ci.org/simon300000/3KEngine.svg?branch=develop)](https://travis-ci.org/simon300000/3KEngine) [![Coverage Status](https://coveralls.io/repos/github/simon300000/3KEngine/badge.svg?branch=develop)](https://coveralls.io/github/simon300000/3KEngine?branch=develop) [![dependencies Status](https://david-dm.org/simon300000/3kengine/status.svg)](https://david-dm.org/simon300000/3kengine) [![devDependencies Status](https://david-dm.org/simon300000/3kengine/dev-status.svg)](https://david-dm.org/simon300000/3kengine?type=dev)
 
 This is 3KEngine
 
