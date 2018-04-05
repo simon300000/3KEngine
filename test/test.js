@@ -51,7 +51,7 @@ describe('Test', function() {
     })
     it('And we could get the corrct chapter based on index', function(done) {
       story.get('one', 2).then(v => {
-        done(assert.equal(v.Andrew,'My name is Andrew.'))
+        done(assert.equal(v.Andrew, 'My name is Andrew.'))
       })
     })
   })
