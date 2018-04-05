@@ -12,7 +12,7 @@ describe('Test', function() {
     })
   })
   describe('Basic', function() {
-    it('module should output a function', function() {
+    it('Module should output a function', function() {
       assert.equal(typeof Engine, 'function')
     })
     it('Able to new Engine() with version 0', async function() {
@@ -55,7 +55,7 @@ describe('Test', function() {
     })
   })
   describe('Player', function() {
-    it('there should be no player when story is just created', async function() {
+    it('There should be no player when story is just created', async function() {
       let v = await story.getPlayers()
       assert.equal(v.length, 0)
     })
