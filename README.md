@@ -20,7 +20,7 @@ OR
 
 ## Author
 
-**3kengine** © [simon3000](https://github.com/simon300000), Released under the [MIT](./LICENSE) License.<br>
+**3kengine** © [simon3000](https://github.com/simon300000), Released under the [GPLv3](./LICENSE) License.<br>
 Authored and maintained by simon3000 with help from contributors ([list](https://github.com/simon300000/3kengine/contributors)).
 
 > [github.com/simon300000](https://github.com/simon300000) · GitHub [@simon3000](https://github.com/simon300000)
