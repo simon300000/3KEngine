@@ -22,7 +22,7 @@ class engine {
    * @method emit
    * @param  {String} channel The event name
    * @param  {String} value   Event data
-   * @return {undefined}         no return
+   * @return {undefined}      no return
    */
   emit(channel, value) {
     this.event.emit(channel, value)
@@ -32,7 +32,7 @@ class engine {
    * @method on
    * @param  {String}   channel  The event name
    * @param  {Function} callback Event Callback
-   * @return {undefined}           no return
+   * @return {undefined}         no return
    */
   on(channel, callback) {
     this.event.on(channel, callback)
@@ -55,8 +55,8 @@ class engine {
    * Put chapter in database
    * @method putChapter
    * @param  {String}   chapter Chapter name
-   * @param  {Array}   array   The array of storys in this chapter
-   * @return {Promise}           Resolve when finnshed
+   * @param  {Array}    array   The array of storys in this chapter
+   * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
     return this.db.batch(
@@ -114,7 +114,7 @@ class engine {
    * @method setPlayer
    * @param  {Number}  index Target player's index
    * @param  {Object}  value Target player data
-   * @return {Promise}      Resolve when finnshed
+   * @return {Promise}       Resolve when finnshed
    */
   async setPlayer(index, value) {
     let playerList = await this.db.get('player')
