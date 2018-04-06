@@ -108,9 +108,9 @@ describe('Test', function() {
       assert.equal(JSON.stringify(await story.config()), "{}")
     })
     it('Able to change config', async function() {
-      await story.setConfig({
-        os: 'macOS'
-      })
+      let config = story.config()
+      config.os = 'macOS'
+      await story.setConfig(config)
       assert.equal((await story.config()).os, "macOS")
     })
   })
