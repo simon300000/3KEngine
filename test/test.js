@@ -33,6 +33,16 @@ describe('Test', function() {
       let v = await story.version()
       assert.equal(v, 1)
     })
+    let story2
+    it('Now I could create second one with same databse but different name and got version 0', async function() {
+      story = new Engine('myStory2', './save')
+      let v = await (new Promise((resolve, reject) => {
+        story.on('ready', v => {
+          resolve(v)
+        })
+      }))
+      assert.equal(v, 0)
+    })
   })
   describe('Story', function() {
     it('We could insert story to some chapter', async function() {
