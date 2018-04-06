@@ -77,39 +77,39 @@ class engine {
   }
   /**
    * Get chapter content in database
-   * @method getChapter
+   * @method chapter
    * @param  {String}   chapter Chapter name
    * @param  {Number}   index   What content in the chapter to get
    * @return {Promise}          Resolve the target content
    */
-  async getChapter(chapter, index) {
+  async chapter(chapter, index) {
     return this.db.get(`chapter_${chapter}_${index}`)
   }
   /**
    * Get target chapter's length
-   * @method getChapters
+   * @method chapters
    * @param  {String}    chapter Chapter name
    * @return {Promise}           Resolve the length of chapter
    */
-  async getChapters(chapter) {
+  async chapters(chapter) {
     return this.db.get(`chapter_${chapter}`)
   }
   /**
    * Get some player data
-   * @method getPlayer
+   * @method player
    * @param  {Number}  index The id of target player
    * @return {Promise}       Resolve the target player's data
    */
-  async getPlayer(index) {
+  async player(index) {
     return this.db.get(`player_${index}`)
   }
   /**
    * Get players array which if the player exsit,
    * the corresponding array[index] will be true
-   * @method getPlayers
+   * @method players
    * @return {Promise}  Resolve the players array
    */
-  async getPlayers() {
+  async players() {
     return this.db.get(`player`)
   }
   /**

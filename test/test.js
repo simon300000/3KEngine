@@ -54,18 +54,18 @@ describe('Test', function() {
       }])
     })
     it('And we could get the correct chapter menu', async function() {
-      let menu = await story.getChapters('one')
+      let menu = await story.chapters('one')
       assert.equal(menu, 4)
     })
     it('And we could get the corrct chapter based on index', async function() {
-      let v = await story.getChapter('one', 1)
+      let v = await story.chapter('one', 1)
       assert.equal(v.Andrew, 'My name is Andrew.')
     })
   })
 
   describe('Player', function() {
     it('There should be no player when story is just created', async function() {
-      let v = await story.getPlayers()
+      let v = await story.players()
       assert.equal(v.length, 0)
     })
     let id
@@ -79,11 +79,11 @@ describe('Test', function() {
       })
     })
     it('There should be one player now', async function() {
-      let v = await story.getPlayers()
+      let v = await story.players()
       assert.equal(v.length, 1)
     })
     it('And we could get the data save in player 0', async function() {
-      let player = await story.getPlayer(id)
+      let player = await story.player(id)
       assert.equal(player.name, 'Simon')
     })
     it('The second player will have id of 1', async function() {
@@ -98,7 +98,7 @@ describe('Test', function() {
       assert.equal(secondId, 0)
     })
     it('The player list of player id 0 should be false now', async function() {
-      let v = await story.getPlayers()
+      let v = await story.players()
       assert.equal(v[0], false)
     })
   })
