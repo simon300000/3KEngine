@@ -13,7 +13,7 @@ class engine {
   constructor(name, savefile) {
     this.name = name
     this.event = new EventEmitter()
-    level(savefile, async (db) => {
+    level(name, savefile, async (db) => {
       this.db = db
       this.emit('version', await this.db.get('version'))
     })
