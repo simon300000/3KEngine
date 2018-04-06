@@ -2,6 +2,9 @@ const EventEmitter = require('events').EventEmitter
 
 const level = require('./database')
 
+/**
+ * The 3KEngine
+ */
 class engine {
   /**
    * Create a new engine instance
