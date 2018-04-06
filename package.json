@@ -35,5 +35,20 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "level": "^3.0.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {},
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "standard"
+    ],
+    "plugins": [],
+    "rules": {
+      "space-before-function-paren": "off",
+      "generator-star-spacing": "off"
+    }
   }
 }
