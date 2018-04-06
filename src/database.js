@@ -15,7 +15,7 @@ const initDatabase = (name, db, call) => {
   let dbInstance = {
     get: key => {
       return new Promise((resolve, reject) => {
-        db.get(key).then(value => {
+        db.get(name + '_' + key).then(value => {
           resolve(JSON.parse(value))
         }, (e) => {
           throw e
@@ -31,7 +31,7 @@ const initDatabase = (name, db, call) => {
     },
     put: (key, value) => {
       return new Promise((resolve, reject) => {
-        db.put(key, JSON.stringify(value)).then(() => {
+        db.put(name + '_' + key, JSON.stringify(value)).then(() => {
           resolve(value)
         }, (e) => {
           throw e
@@ -40,13 +40,13 @@ const initDatabase = (name, db, call) => {
     },
     db: db
   }
-  db.get('version').then(data => {
+  db.get(`${name}_version`).then(data => {
     call(dbInstance)
   }, (e) => {
     if (e.notFound) {
       db.batch()
-        .put('version', JSON.stringify(0))
-        .put('player', JSON.stringify([]))
+        .put(`${name}_version`, JSON.stringify(0))
+        .put(`${name}_player`, JSON.stringify([]))
         .write()
         .then(() => {
           call(dbInstance)

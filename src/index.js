@@ -3,7 +3,6 @@ const EventEmitter = require('events').EventEmitter
 const level = require('./database')
 
 class engine {
-  // TODO: Name should be useful in furture
   /**
    * Create a new engine instance
    * @method constructor
@@ -63,12 +62,12 @@ class engine {
     return this.db.batch(
       [{
         type: 'put',
-        key: `chapter_${chapter}_0`,
+        key: `${this.name}_chapter_${chapter}_0`,
         value: JSON.stringify(array.length)
       }].concat(array.map((u, index) => {
         return {
           type: 'put',
-          key: `chapter_${chapter}_${index + 1}`,
+          key: `${this.name}_chapter_${chapter}_${index + 1}`,
           value: JSON.stringify(u)
         }
       })))
