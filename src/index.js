@@ -151,6 +151,23 @@ class engine {
     }
     return playerList.length
   }
+  /**
+   * Return config settings
+   * @method config
+   * @return {Promise} Resolve configuration
+   */
+  async config() {
+    return this.db.get('config')
+  }
+  /**
+   * Change config settings
+   * @method setConfig
+   * @param  {Object}  config The target config to change
+   * @return {Promise}        Resolve when finnshed
+   */
+  async setConfig(config) {
+    this.db.put('config', config)
+  }
 }
 
 module.exports = engine

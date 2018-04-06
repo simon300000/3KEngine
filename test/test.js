@@ -40,6 +40,7 @@ describe('Test', function() {
       assert.equal(v, 0)
     })
   })
+
   describe('Story', function() {
     it('We could insert story to some chapter', async function() {
       await story.putChapter('one', [{
@@ -61,6 +62,7 @@ describe('Test', function() {
       assert.equal(v.Andrew, 'My name is Andrew.')
     })
   })
+
   describe('Player', function() {
     it('There should be no player when story is just created', async function() {
       let v = await story.getPlayers()
@@ -98,6 +100,18 @@ describe('Test', function() {
     it('The player list of player id 0 should be false now', async function() {
       let v = await story.getPlayers()
       assert.equal(v[0], false)
+    })
+  })
+
+  describe('Config', async function() {
+    it('Able to have a black Object default config', async function() {
+      assert.equal(JSON.stringify(await story.config()), "{}")
+    })
+    it('Able to change config', async function() {
+      await story.setConfig({
+        os: 'macOS'
+      })
+      assert.equal((await story.config()).os, "macOS")
     })
   })
 })

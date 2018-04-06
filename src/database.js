@@ -47,6 +47,7 @@ const initDatabase = (name, db, call) => {
       db.batch()
         .put(`${name}_version`, JSON.stringify(0))
         .put(`${name}_player`, JSON.stringify([]))
+        .put(`${name}_config`, JSON.stringify({}))
         .write()
         .then(() => {
           call(dbInstance)
