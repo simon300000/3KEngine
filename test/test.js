@@ -4,13 +4,14 @@ const Engine = require('../')
 const fs = require('fs-extra')
 
 
+after(() => {
+  fs.emptyDir('./save').then(() => {
+    fs.rmdir('./save')
+  })
+})
+
 describe('Test', function() {
   let story
-  after(() => {
-    fs.emptyDir('./save').then(() => {
-      fs.rmdir('./save')
-    })
-  })
   describe('Basic', function() {
     it('Module should output a function', function() {
       assert.equal(typeof Engine, 'function')
