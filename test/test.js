@@ -19,7 +19,7 @@ describe('Test', function() {
     it('Able to new Engine() with version 0', async function() {
       story = new Engine('myStory', './save')
       let v = await (new Promise((resolve, reject) => {
-        story.on('version', v => {
+        story.on('ready', v => {
           resolve(v)
         })
       }))

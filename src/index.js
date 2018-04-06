@@ -17,7 +17,7 @@ class engine {
     this.event = new EventEmitter()
     level(name, savefile, async (db) => {
       this.db = db
-      this.emit('version', await this.db.get('version'))
+      this.emit('ready', await this.db.get('version'))
     })
   }
   /**
