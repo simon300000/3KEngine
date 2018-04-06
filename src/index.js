@@ -166,7 +166,7 @@ class engine {
    * @return {Promise}        Resolve when finnshed
    */
   async setConfig(config) {
-    this.db.put('config', config)
+    return this.db.put('config', config)
   }
 }
 
