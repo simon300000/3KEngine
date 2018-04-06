@@ -46,11 +46,11 @@ describe('Test', function() {
       }])
     })
     it('And we could get the correct chapter menu', async function() {
-      let menu = await story.getChapter('one')
+      let menu = await story.getChapters('one')
       assert.equal(menu, 4)
     })
     it('And we could get the corrct chapter based on index', async function() {
-      let v = await story.getChapter('one', 2)
+      let v = await story.getChapter('one', 1)
       assert.equal(v.Andrew, 'My name is Andrew.')
     })
   })

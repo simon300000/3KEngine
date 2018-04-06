@@ -62,12 +62,12 @@ class engine {
     return this.db.batch(
       [{
         type: 'put',
-        key: `${this.name}_chapter_${chapter}_0`,
+        key: `${this.name}_chapter_${chapter}`,
         value: JSON.stringify(array.length)
       }].concat(array.map((u, index) => {
         return {
           type: 'put',
-          key: `${this.name}_chapter_${chapter}_${index + 1}`,
+          key: `${this.name}_chapter_${chapter}_${index}`,
           value: JSON.stringify(u)
         }
       })))
@@ -80,8 +80,16 @@ class engine {
    * @return {Promise}          Resolve the target content
    */
   async getChapter(chapter, index) {
-    index = index || 0
     return this.db.get(`chapter_${chapter}_${index}`)
+  }
+  /**
+   * Get target chapter's length
+   * @method getChapters
+   * @param  {String}    chapter Chapter name
+   * @return {Promise}           Resolve the length of chapter
+   */
+  async getChapters(chapter) {
+    return this.db.get(`chapter_${chapter}`)
   }
   /**
    * Get some player data
