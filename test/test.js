@@ -21,22 +21,22 @@ describe('Test', function() {
     })
     it('Able to new Engine() with version 0', async function() {
       story = new Engine('myStory')
-      let v = await story.init('./save')
-      assert.equal(v, 0)
+      let version = await story.init('./save')
+      assert.equal(version, 0)
     })
     it('Which should be object', function() {
       assert.equal(typeof story, 'object')
     })
     it('The version will be 1 if changed', async function() {
       await story.version(1)
-      let v = await story.version()
-      assert.equal(v, 1)
+      let version = await story.version()
+      assert.equal(version, 1)
     })
     let story2
     it('Now I could create second one with same databse but different name and got version 0', async function() {
       story2 = new Engine('myStory2')
-      let v = await story2.init('./save')
-      assert.equal(v, 0)
+      let version = await story2.init('./save')
+      assert.equal(version, 0)
     })
   })
 
