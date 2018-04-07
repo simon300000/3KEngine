@@ -16,25 +16,27 @@ const openDatabase = async (name, db) => {
 
 const initDatabase = (name, db) => {
   return new Promise(resolve => {
-    db.get(`${name}_version`).then(data => {
-      resolve()
-    }).catch((e) => {
-      if (e.notFound) {
-        db.batch()
-          .put(`${name}_version`, JSON.stringify(0))
-          .put(`${name}_player`, JSON.stringify([]))
-          .put(`${name}_config`, JSON.stringify({}))
-          .write()
-          .then(() => {
-            resolve()
-          })
-          .catch(e => {
-            throw e
-          })
-      } else {
-        throw e
-      }
-    })
+    db.get(`${name}_version`)
+      .then(data => {
+        resolve()
+      })
+      .catch(e => {
+        if (e.notFound) {
+          db.batch()
+            .put(`${name}_version`, JSON.stringify(0))
+            .put(`${name}_player`, JSON.stringify([]))
+            .put(`${name}_config`, JSON.stringify({}))
+            .write()
+            .then(() => {
+              resolve()
+            })
+            .catch(e => {
+              throw e
+            })
+        } else {
+          throw e
+        }
+      })
   })
 }
 
@@ -42,27 +44,33 @@ class DatabaseInstance {
   constructor(name, db) {
     this.get = key => {
       return new Promise(resolve => {
-        db.get(name + '_' + key).then(value => {
-          resolve(JSON.parse(value))
-        }).catch(e => {
-          throw e
-        })
+        db.get(name + '_' + key)
+          .then(value => {
+            resolve(JSON.parse(value))
+          })
+          .catch(e => {
+            throw e
+          })
       })
     }
     this.put = (key, value) => {
       return new Promise(resolve => {
-        db.put(name + '_' + key, JSON.stringify(value)).then(() => {
-          resolve(value)
-        }).catch(e => {
-          throw e
-        })
+        db.put(name + '_' + key, JSON.stringify(value))
+          .then(() => {
+            resolve(value)
+          })
+          .catch(e => {
+            throw e
+          })
       })
     }
     this.batch = array => {
       return new Promise(resolve => {
-        db.batch(array).then(resolve).catch(e => {
-          throw e
-        })
+        db.batch(array)
+          .then(resolve)
+          .catch(e => {
+            throw e
+          })
       })
     }
     this.db = db
