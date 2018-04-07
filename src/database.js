@@ -3,12 +3,10 @@ let databaseOpen = []
 let database = {}
 
 const openDatabase = (name, file, call) => {
-  level(file, (err, db) => {
-    if (err) throw err
-    databaseOpen.push(file)
-    database[file] = db
-    initDatabase(name, db, call)
-  })
+  let db = level(file)
+  databaseOpen.push(file)
+  database[file] = db
+  initDatabase(name, db, call)
 }
 
 const initDatabase = (name, db, call) => {
