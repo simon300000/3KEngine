@@ -2,14 +2,14 @@ const level = require('level')
 let databaseOpen = []
 let database = {}
 
-const openDatabase = (name, file) => {
+const storeDatabase = (name, file) => {
   let db = level(file)
   databaseOpen.push(file)
   database[file] = db
-  return initDatabase(name, db)
+  return openDatabase(name, db)
 }
 
-const initDatabase = (name, db) => {
+const openDatabase = async (name, db) => {
   let dbInstance = {
     get: key => {
       return new Promise((resolve) => {
@@ -38,9 +38,14 @@ const initDatabase = (name, db) => {
     },
     db: db
   }
+  await initDatabase(name, db)
+  return dbInstance
+}
+
+const initDatabase = (name, db) => {
   return new Promise((resolve) => {
     db.get(`${name}_version`).then(data => {
-      resolve(dbInstance)
+      resolve()
     }).catch((e) => {
       if (e.notFound) {
         db.batch()
@@ -49,7 +54,7 @@ const initDatabase = (name, db) => {
           .put(`${name}_config`, JSON.stringify({}))
           .write()
           .then(() => {
-            resolve(dbInstance)
+            resolve()
           }).catch((e) => {
             throw e
           })
@@ -62,8 +67,8 @@ const initDatabase = (name, db) => {
 
 module.exports = (name, file) => {
   if (databaseOpen.includes(file)) {
-    return initDatabase(name, database[file])
+    return openDatabase(name, database[file])
   } else {
-    return openDatabase(name, file)
+    return storeDatabase(name, file)
   }
 }
