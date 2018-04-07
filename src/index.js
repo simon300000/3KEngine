@@ -1,5 +1,3 @@
-// const EventEmitter = require('events').EventEmitter
-
 const level = require('./database')
 
 /**
@@ -13,7 +11,6 @@ class engine {
    */
   constructor(name) {
     this.name = name
-    // this.event = new EventEmitter()
   }
   /**
    * Link the database
@@ -25,26 +22,6 @@ class engine {
     this.db = await level(this.name, savefile)
     return this.db.get('version')
   }
-  // /**
-  //  * Emit a new event
-  //  * @method emit
-  //  * @param  {String} channel The event name
-  //  * @param  {String} value   Event data
-  //  * @return {undefined}      no return
-  //  */
-  // emit(channel, value) {
-  //   this.event.emit(channel, value)
-  // }
-  // /**
-  //  * Create a event listener
-  //  * @method on
-  //  * @param  {String}   channel  The event name
-  //  * @param  {Function} callback Event Callback
-  //  * @return {undefined}         no return
-  //  */
-  // on(channel, callback) {
-  //   this.event.on(channel, callback)
-  // }
   /**
    * Return current database version if v is undefined,
    * Modify current database version to v is v is defined
