@@ -2,17 +2,17 @@ const level = require('level')
 let databaseOpen = []
 let database = {}
 
-const openDatabase = async (name, file) => {
+const openDatabase = (name, file) => {
   let db = level(file)
   databaseOpen.push(file)
   database[file] = db
   return initDatabase(name, db)
 }
 
-const initDatabase = async (name, db) => {
+const initDatabase = (name, db) => {
   let dbInstance = {
     get: key => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         db.get(name + '_' + key).then(value => {
           resolve(JSON.parse(value))
         }).catch((e) => {
@@ -21,14 +21,14 @@ const initDatabase = async (name, db) => {
       })
     },
     batch: array => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         db.batch(array).then(resolve).catch((e) => {
           throw e
         })
       })
     },
     put: (key, value) => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         db.put(name + '_' + key, JSON.stringify(value)).then(() => {
           resolve(value)
         }).catch((e) => {
@@ -38,7 +38,7 @@ const initDatabase = async (name, db) => {
     },
     db: db
   }
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     db.get(`${name}_version`).then(data => {
       resolve(dbInstance)
     }).catch((e) => {
@@ -60,7 +60,7 @@ const initDatabase = async (name, db) => {
   })
 }
 
-module.exports = async (name, file) => {
+module.exports = (name, file) => {
   if (databaseOpen.includes(file)) {
     return initDatabase(name, database[file])
   } else {
