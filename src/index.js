@@ -24,23 +24,23 @@ class engine {
       })
     })
   }
-  /**
-   * Emit a new event
-   * @method emit
-   * @param  {String} channel The event name
-   * @param  {String} value   Event data
-   * @return {undefined}      no return
-   */
+  // /**
+  //  * Emit a new event
+  //  * @method emit
+  //  * @param  {String} channel The event name
+  //  * @param  {String} value   Event data
+  //  * @return {undefined}      no return
+  //  */
   // emit(channel, value) {
   //   this.event.emit(channel, value)
   // }
-  /**
-   * Create a event listener
-   * @method on
-   * @param  {String}   channel  The event name
-   * @param  {Function} callback Event Callback
-   * @return {undefined}         no return
-   */
+  // /**
+  //  * Create a event listener
+  //  * @method on
+  //  * @param  {String}   channel  The event name
+  //  * @param  {Function} callback Event Callback
+  //  * @return {undefined}         no return
+  //  */
   // on(channel, callback) {
   //   this.event.on(channel, callback)
   // }
