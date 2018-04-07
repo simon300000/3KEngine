@@ -38,6 +38,11 @@ describe('Test', function() {
       let version = await story2.init('./save')
       assert.equal(version, 0)
     })
+    it('Now I could create third one with same databse and name and got version 1', async function() {
+      let story3 = new Engine('myStory')
+      let version = await story3.init('./save')
+      assert.equal(version, 1)
+    })
   })
 
   describe('Story', function() {
