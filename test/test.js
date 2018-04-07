@@ -27,6 +27,9 @@ describe('Test', function() {
     it('Which should be object', function() {
       assert.equal(typeof story, 'object')
     })
+    it('Name of story is what I put in', async function() {
+      assert.equal(story.name, 'myStory')
+    })
     it('The version will be 1 if changed', async function() {
       await story.version(1)
       let version = await story.version()
