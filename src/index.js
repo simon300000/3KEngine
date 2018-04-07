@@ -17,11 +17,8 @@ class engine {
     // this.event = new EventEmitter()
   }
   async init(savefile) {
-    await new Promise((resolve, reject) => {
-      level(this.name, savefile, async (db) => {
-        this.db = db
-        resolve()
-      })
+    this.db = await new Promise((resolve, reject) => {
+      level(this.name, savefile, resolve)
     })
     return this.db.get('version')
   }
