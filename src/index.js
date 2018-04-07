@@ -10,12 +10,17 @@ class engine {
    * Create a new engine instance
    * @method constructor
    * @param  {String}    name     The name of the engine
-   * @param  {String}    savefile The location of database
    */
   constructor(name) {
     this.name = name
     // this.event = new EventEmitter()
   }
+  /**
+   * Link the database
+   * @method init
+   * @param  {String}  savefile The location of database
+   * @return {Promise}          Resolve the database version
+   */
   async init(savefile) {
     this.db = await level(this.name, savefile)
     return this.db.get('version')
