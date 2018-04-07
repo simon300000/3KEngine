@@ -30,11 +30,9 @@ const initDatabase = (name, db) => {
             .then(() => {
               resolve()
             })
-            .catch(e => {
-              throw e
-            })
+            .catch(console.error)
         } else {
-          throw e
+          console.error(e)
         }
       })
   })
@@ -48,9 +46,7 @@ class DatabaseInstance {
           .then(value => {
             resolve(JSON.parse(value))
           })
-          .catch(e => {
-            throw e
-          })
+          .catch(console.error)
       })
     }
     this.put = (key, value) => {
@@ -59,18 +55,14 @@ class DatabaseInstance {
           .then(() => {
             resolve(value)
           })
-          .catch(e => {
-            throw e
-          })
+          .catch(console.error)
       })
     }
     this.batch = array => {
       return new Promise(resolve => {
         db.batch(array)
           .then(resolve)
-          .catch(e => {
-            throw e
-          })
+          .catch(console.error)
       })
     }
     this.db = db
