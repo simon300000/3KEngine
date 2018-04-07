@@ -47,7 +47,7 @@ class engine {
    * @param  {Number}  v The target database version
    * @return {Promise}   Resolve current version
    */
-  async version(v) {
+  version(v) {
     if (v === undefined) {
       return this.db.get('version')
     } else {
@@ -82,7 +82,7 @@ class engine {
    * @param  {Number}   index   What content in the chapter to get
    * @return {Promise}          Resolve the target content
    */
-  async chapter(chapter, index) {
+  chapter(chapter, index) {
     return this.db.get(`chapter_${chapter}_${index}`)
   }
   /**
@@ -91,7 +91,7 @@ class engine {
    * @param  {String}    chapter Chapter name
    * @return {Promise}           Resolve the length of chapter
    */
-  async chapters(chapter) {
+  chapters(chapter) {
     return this.db.get(`chapter_${chapter}`)
   }
   /**
@@ -100,7 +100,7 @@ class engine {
    * @param  {Number}  index The id of target player
    * @return {Promise}       Resolve the target player's data
    */
-  async player(index) {
+  player(index) {
     return this.db.get(`player_${index}`)
   }
   /**
@@ -109,7 +109,7 @@ class engine {
    * @method players
    * @return {Promise}  Resolve the players array
    */
-  async players() {
+  players() {
     return this.db.get(`player`)
   }
   /**
@@ -156,7 +156,7 @@ class engine {
    * @method config
    * @return {Promise} Resolve configuration
    */
-  async config() {
+  config() {
     return this.db.get('config')
   }
   /**
@@ -165,7 +165,7 @@ class engine {
    * @param  {Object}  config The target config to change
    * @return {Promise}        Resolve when finnshed
    */
-  async setConfig(config) {
+  setConfig(config) {
     return this.db.put('config', config)
   }
 }
