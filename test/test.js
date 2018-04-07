@@ -57,15 +57,15 @@ describe('Test', function() {
       assert.equal(menu, 4)
     })
     it('And we could get the corrct chapter based on index', async function() {
-      let v = await story.chapter('one', 1)
-      assert.equal(v.Andrew, 'My name is Andrew.')
+      let content = await story.chapter('one', 1)
+      assert.equal(content.Andrew, 'My name is Andrew.')
     })
   })
 
   describe('Player', function() {
     it('There should be no player when story is just created', async function() {
-      let v = await story.players()
-      assert.equal(v.length, 0)
+      let index = await story.players()
+      assert.equal(index.length, 0)
     })
     let id
     it('The first player will have id of 0', async function() {
@@ -78,8 +78,8 @@ describe('Test', function() {
       })
     })
     it('There should be one player now', async function() {
-      let v = await story.players()
-      assert.equal(v.length, 1)
+      let index = await story.players()
+      assert.equal(index.length, 1)
     })
     it('And we could get the data save in player 0', async function() {
       let player = await story.player(id)
@@ -97,20 +97,22 @@ describe('Test', function() {
       assert.equal(secondId, 0)
     })
     it('The player list of player id 0 should be false now', async function() {
-      let v = await story.players()
-      assert.equal(v[0], false)
+      let index = await story.players()
+      assert.equal(index[0], false)
     })
   })
 
   describe('Config', async function() {
-    it('Able to have a black Object default config', async function() {
-      assert.equal(JSON.stringify(await story.config()), "{}")
+    it('Have a black Object as config by default', async function() {
+      let config = await story.config()
+      assert.equal(JSON.stringify(config), "{}")
     })
     it('Able to change config', async function() {
-      let config = story.config()
+      let config = await story.config()
       config.os = 'macOS'
       await story.setConfig(config)
-      assert.equal((await story.config()).os, "macOS")
+      let newConfig = await story.config()
+      assert.equal(newConfig.os, "macOS")
     })
   })
 })
