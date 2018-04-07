@@ -16,13 +16,14 @@ class engine {
     this.name = name
     // this.event = new EventEmitter()
   }
-  init(savefile) {
-    return new Promise((resolve, reject) => {
+  async init(savefile) {
+    await new Promise((resolve, reject) => {
       level(this.name, savefile, async (db) => {
         this.db = db
-        resolve(this.db.get('version'))
+        resolve()
       })
     })
+    return this.db.get('version')
   }
   // /**
   //  * Emit a new event
