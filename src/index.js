@@ -1,4 +1,4 @@
-const EventEmitter = require('events').EventEmitter
+// const EventEmitter = require('events').EventEmitter
 
 const level = require('./database')
 
@@ -12,12 +12,16 @@ class engine {
    * @param  {String}    name     The name of the engine
    * @param  {String}    savefile The location of database
    */
-  constructor(name, savefile) {
+  constructor(name) {
     this.name = name
-    this.event = new EventEmitter()
-    level(name, savefile, async (db) => {
-      this.db = db
-      this.emit('ready', await this.db.get('version'))
+    // this.event = new EventEmitter()
+  }
+  init(savefile) {
+    return new Promise((resolve, reject) => {
+      level(this.name, savefile, async (db) => {
+        this.db = db
+        resolve(this.db.get('version'))
+      })
     })
   }
   /**
@@ -27,9 +31,9 @@ class engine {
    * @param  {String} value   Event data
    * @return {undefined}      no return
    */
-  emit(channel, value) {
-    this.event.emit(channel, value)
-  }
+  // emit(channel, value) {
+  //   this.event.emit(channel, value)
+  // }
   /**
    * Create a event listener
    * @method on
@@ -37,9 +41,9 @@ class engine {
    * @param  {Function} callback Event Callback
    * @return {undefined}         no return
    */
-  on(channel, callback) {
-    this.event.on(channel, callback)
-  }
+  // on(channel, callback) {
+  //   this.event.on(channel, callback)
+  // }
   /**
    * Return current database version if v is undefined,
    * Modify current database version to v is v is defined
