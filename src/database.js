@@ -2,14 +2,14 @@ const level = require('level')
 let databaseOpen = []
 let database = {}
 
-const openDatabase = (name, file, call) => {
+const openDatabase = async (name, file) => {
   let db = level(file)
   databaseOpen.push(file)
   database[file] = db
-  initDatabase(name, db, call)
+  return initDatabase(name, db)
 }
 
-const initDatabase = (name, db, call) => {
+const initDatabase = async (name, db) => {
   let dbInstance = {
     get: key => {
       return new Promise((resolve, reject) => {
@@ -38,30 +38,32 @@ const initDatabase = (name, db, call) => {
     },
     db: db
   }
-  db.get(`${name}_version`).then(data => {
-    call(dbInstance)
-  }).catch((e) => {
-    if (e.notFound) {
-      db.batch()
-        .put(`${name}_version`, JSON.stringify(0))
-        .put(`${name}_player`, JSON.stringify([]))
-        .put(`${name}_config`, JSON.stringify({}))
-        .write()
-        .then(() => {
-          call(dbInstance)
-        }).catch((e) => {
-          throw e
-        })
-    } else {
-      throw e
-    }
+  return new Promise((resolve, reject) => {
+    db.get(`${name}_version`).then(data => {
+      resolve(dbInstance)
+    }).catch((e) => {
+      if (e.notFound) {
+        db.batch()
+          .put(`${name}_version`, JSON.stringify(0))
+          .put(`${name}_player`, JSON.stringify([]))
+          .put(`${name}_config`, JSON.stringify({}))
+          .write()
+          .then(() => {
+            resolve(dbInstance)
+          }).catch((e) => {
+            throw e
+          })
+      } else {
+        throw e
+      }
+    })
   })
 }
 
-module.exports = (name, file, call) => {
+module.exports = async (name, file) => {
   if (databaseOpen.includes(file)) {
-    initDatabase(name, database[file], call)
+    return initDatabase(name, database[file])
   } else {
-    openDatabase(name, file, call)
+    return openDatabase(name, file)
   }
 }
