@@ -15,7 +15,7 @@ const openDatabase = async (name, db) => {
 }
 
 const initDatabase = (name, db) => {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     db.get(`${name}_version`).then(data => {
       resolve()
     }).catch((e) => {
@@ -27,7 +27,8 @@ const initDatabase = (name, db) => {
           .write()
           .then(() => {
             resolve()
-          }).catch((e) => {
+          })
+          .catch(e => {
             throw e
           })
       } else {
@@ -40,26 +41,26 @@ const initDatabase = (name, db) => {
 class DatabaseInstance {
   constructor(name, db) {
     this.get = key => {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         db.get(name + '_' + key).then(value => {
           resolve(JSON.parse(value))
-        }).catch((e) => {
+        }).catch(e => {
           throw e
         })
       })
     }
     this.put = (key, value) => {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         db.put(name + '_' + key, JSON.stringify(value)).then(() => {
           resolve(value)
-        }).catch((e) => {
+        }).catch(e => {
           throw e
         })
       })
     }
     this.batch = array => {
-      return new Promise((resolve) => {
-        db.batch(array).then(resolve).catch((e) => {
+      return new Promise(resolve => {
+        db.batch(array).then(resolve).catch(e => {
           throw e
         })
       })
