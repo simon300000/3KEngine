@@ -17,14 +17,14 @@ const initDatabase = (name, db, call) => {
       return new Promise((resolve, reject) => {
         db.get(name + '_' + key).then(value => {
           resolve(JSON.parse(value))
-        }, (e) => {
+        }).catch((e) => {
           throw e
         })
       })
     },
     batch: array => {
       return new Promise((resolve, reject) => {
-        db.batch(array).then(resolve, (e) => {
+        db.batch(array).then(resolve).catch((e) => {
           throw e
         })
       })
@@ -33,7 +33,7 @@ const initDatabase = (name, db, call) => {
       return new Promise((resolve, reject) => {
         db.put(name + '_' + key, JSON.stringify(value)).then(() => {
           resolve(value)
-        }, (e) => {
+        }).catch((e) => {
           throw e
         })
       })
@@ -42,7 +42,7 @@ const initDatabase = (name, db, call) => {
   }
   db.get(`${name}_version`).then(data => {
     call(dbInstance)
-  }, (e) => {
+  }).catch((e) => {
     if (e.notFound) {
       db.batch()
         .put(`${name}_version`, JSON.stringify(0))
@@ -51,7 +51,7 @@ const initDatabase = (name, db, call) => {
         .write()
         .then(() => {
           call(dbInstance)
-        }, (e) => {
+        }).catch((e) => {
           throw e
         })
     } else {
