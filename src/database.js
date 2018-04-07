@@ -17,9 +17,7 @@ const openDatabase = async (name, db) => {
 const initDatabase = (name, db) => {
   return new Promise(resolve => {
     db.get(`${name}_version`)
-      .then(data => {
-        resolve()
-      })
+      .then(resolve)
       .catch(e => {
         if (e.notFound) {
           db.batch()
@@ -27,9 +25,7 @@ const initDatabase = (name, db) => {
             .put(`${name}_player`, JSON.stringify([]))
             .put(`${name}_config`, JSON.stringify({}))
             .write()
-            .then(() => {
-              resolve()
-            })
+            .then(resolve)
             .catch(console.error)
         } else {
           console.error(e)
@@ -52,9 +48,7 @@ class DatabaseInstance {
     this.put = (key, value) => {
       return new Promise(resolve => {
         db.put(name + '_' + key, JSON.stringify(value))
-          .then(() => {
-            resolve(value)
-          })
+          .then(resolve)
           .catch(console.error)
       })
     }
