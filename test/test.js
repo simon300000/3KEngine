@@ -21,9 +21,7 @@ describe('Test', function() {
     })
     it('Able to new Engine() with version 0', async function() {
       story = new Engine('myStory')
-      let v = await (new Promise(async (resolve) => {
-        resolve(await story.init('./save'))
-      }))
+      let v = await story.init('./save')
       assert.equal(v, 0)
     })
     it('Which should be object', function() {
@@ -37,9 +35,7 @@ describe('Test', function() {
     let story2
     it('Now I could create second one with same databse but different name and got version 0', async function() {
       story2 = new Engine('myStory2')
-      let v = await (new Promise(async (resolve) => {
-        resolve(await story2.init('./save'))
-      }))
+      let v = await story2.init('./save')
       assert.equal(v, 0)
     })
   })
