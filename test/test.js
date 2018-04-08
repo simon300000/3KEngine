@@ -15,7 +15,7 @@ after(() => {
 
 describe('Test', function() {
   let story
-  describe('Basic', function() {
+  context('Basic', function() {
     it('Module should output a function', function() {
       assert.equal(typeof Engine, 'function')
     })
@@ -48,7 +48,7 @@ describe('Test', function() {
     })
   })
 
-  describe('Story', function() {
+  context('Story', function() {
     it('We could insert story to some chapter', async function() {
       await story.putChapter('one', [{
         Simon: 'What is your name?'
@@ -70,7 +70,7 @@ describe('Test', function() {
     })
   })
 
-  describe('Player', function() {
+  context('Player', function() {
     it('There should be no player when story is just created', async function() {
       let index = await story.players()
       assert.equal(index.length, 0)
@@ -110,7 +110,7 @@ describe('Test', function() {
     })
   })
 
-  describe('Config', async function() {
+  context('Config', async function() {
     it('Have a black Object as config by default', async function() {
       let config = await story.config()
       assert.equal(JSON.stringify(config), "{}")
