@@ -24,7 +24,7 @@ class engine {
   }
   /**
    * Return current database version if v is undefined,
-   * Modify current database version to v is v is defined
+   * Modify current database version to v if v is defined
    * @method version
    * @param  {Number}  v The target database version
    * @return {Promise}   Resolve current version
