@@ -3,6 +3,9 @@ const level = require('./database')
 /**
  * The 3KEngine
  */
+
+// TODO: The next() script and all related
+
 class engine {
   /**
    * Create a new engine instance
