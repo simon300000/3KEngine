@@ -1,0 +1,24 @@
+{
+  "ecmaVersion": 7,
+  "libs": [
+    "chai"
+  ],
+  "loadEagerly": [
+    "src/*.js"
+  ],
+  "dontLoad": [],
+  "plugins": {
+    "es_modules": {},
+    "node": {},
+    "doc_comment": {
+      "fullDocs": true,
+      "strong": true
+    },
+    "modules": {
+      "dontLoad": "",
+      "load": "",
+      "modules": ""
+    },
+    "commonjs": {}
+  }
+}
