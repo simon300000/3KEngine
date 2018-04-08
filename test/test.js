@@ -13,9 +13,10 @@ after(() => {
   })
 })
 
-describe('Test', function() {
-  let story
-  context('Basic', function() {
+let story
+
+describe('Basic', function() {
+  context('Module Behavior', function() {
     it('Module should output a function', function() {
       assert.equal(typeof Engine, 'function')
     })
@@ -30,6 +31,8 @@ describe('Test', function() {
     it('Name of story is what I put in', async function() {
       assert.equal(story.name, 'myStory')
     })
+  })
+  context('Database version', function() {
     it('The version will be 1 if changed', async function() {
       await story.version(1)
       let version = await story.version()
@@ -47,39 +50,43 @@ describe('Test', function() {
       assert.equal(version, 1)
     })
   })
+})
 
-  context('Story', function() {
-    it('We could insert story to some chapter', async function() {
-      await story.putChapter('one', [{
-        Simon: 'What is your name?'
-      }, {
-        Andrew: 'My name is Andrew.'
-      }, {
-        Simon: 'Nice to meet you.'
-      }, {
-        Andrew: 'Nice to meet you too.'
-      }])
-    })
-    it('And we could get the correct chapter menu', async function() {
-      let menu = await story.chapters('one')
-      assert.equal(menu, 4)
-    })
-    it('And we could get the corrct chapter based on index', async function() {
-      let content = await story.chapter('one', 1)
-      assert.equal(content.Andrew, 'My name is Andrew.')
-    })
+describe('Story', function() {
+  it('We could insert story to some chapter', async function() {
+    await story.putChapter('one', [{
+      Simon: 'What is your name?'
+    }, {
+      Andrew: 'My name is Andrew.'
+    }, {
+      Simon: 'Nice to meet you.'
+    }, {
+      Andrew: 'Nice to meet you too.'
+    }])
   })
+  it('And we could get the correct chapter menu', async function() {
+    let menu = await story.chapters('one')
+    assert.equal(menu, 4)
+  })
+  it('And we could get the corrct chapter based on index', async function() {
+    let content = await story.chapter('one', 1)
+    assert.equal(content.Andrew, 'My name is Andrew.')
+  })
+})
 
-  context('Player', function() {
+describe('Player', function() {
+  let id
+  context('Index', function() {
     it('There should be no player when story is just created', async function() {
       let index = await story.players()
       assert.equal(index.length, 0)
     })
-    let id
     it('The first player will have id of 0', async function() {
       id = await story.newPlayer()
       assert.equal(id, 0)
     })
+  })
+  context('Insert', function() {
     it('We could insert some data to this player 0', async function() {
       await story.setPlayer(id, {
         name: 'Simon'
@@ -97,6 +104,8 @@ describe('Test', function() {
       let secondId = await story.newPlayer()
       assert.equal(secondId, 1)
     })
+  })
+  context('Delete', function() {
     it('And we could delete player 0', async function() {
       await story.delPlayer(id)
     })
@@ -109,18 +118,18 @@ describe('Test', function() {
       assert.equal(index[0], false)
     })
   })
+})
 
-  context('Config', async function() {
-    it('Have a black Object as config by default', async function() {
-      let config = await story.config()
-      assert.equal(JSON.stringify(config), "{}")
-    })
-    it('Able to change config', async function() {
-      let config = await story.config()
-      config.os = 'macOS'
-      await story.setConfig(config)
-      let newConfig = await story.config()
-      assert.equal(newConfig.os, "macOS")
-    })
+describe('Config', function() {
+  it('Have a black Object as config by default', async function() {
+    let config = await story.config()
+    assert.equal(JSON.stringify(config), "{}")
+  })
+  it('Able to change config', async function() {
+    let config = await story.config()
+    config.os = 'macOS'
+    await story.setConfig(config)
+    let newConfig = await story.config()
+    assert.equal(newConfig.os, "macOS")
   })
 })
