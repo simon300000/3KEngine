@@ -14,6 +14,7 @@ class engine {
    */
   constructor(name) {
     this.name = name
+    this.currentPlayer = undefined
   }
   /**
    * Link the database
