@@ -56,7 +56,7 @@ class engine {
       }].concat(array.map((u, index) => {
         return {
           type: 'put',
-          key: `${this.name}_chapter_${chapter}_${index}`,
+          key: `${this.name}_chapter_${chapter}_index_${index}`,
           value: JSON.stringify(u)
         }
       })))
@@ -69,7 +69,7 @@ class engine {
    * @return {Promise}          Resolve the target content
    */
   chapter(chapter, index) {
-    return this.db.get(`chapter_${chapter}_${index}`)
+    return this.db.get(`chapter_${chapter}_index_${index}`)
   }
   /**
    * Get target chapter's length
