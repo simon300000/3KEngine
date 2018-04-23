@@ -48,18 +48,26 @@ class engine {
    * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
+    let marks = []
     return this.db.batch(
       [{
         type: 'put',
         key: `${this.name}_chapter_${chapter}`,
         value: JSON.stringify(array.length)
       }].concat(array.map((u, index) => {
+        if (u.mark) {
+          marks.push({
+            type: 'put',
+            key: `${this.name}_mark_${u.mark}`,
+            value: `chapter_${chapter}_index_${index}`
+          })
+        }
         return {
           type: 'put',
           key: `${this.name}_chapter_${chapter}_index_${index}`,
           value: JSON.stringify(u)
         }
-      })))
+      })).concat(marks))
   }
   /**
    * Get chapter content in database
