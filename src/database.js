@@ -2,6 +2,8 @@ const level = require('level')
 let databaseOpen = []
 let database = {}
 
+const R = require('ramda')
+
 const storeDatabase = (name, file) => {
   let db = level(file)
   databaseOpen.push(file)
@@ -39,9 +41,7 @@ class DatabaseInstance {
     this.get = key => {
       return new Promise(resolve => {
         db.get(`${name}_${key}`)
-          .then(value => {
-            resolve(JSON.parse(value))
-          })
+          .then(R.compose(resolve, JSON.parse))
           .catch(console.error)
       })
     }

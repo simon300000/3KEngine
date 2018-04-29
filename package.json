@@ -34,7 +34,8 @@
     "nyc": "^11.6.0"
   },
   "dependencies": {
-    "level": "^3.0.0"
+    "level": "^3.0.0",
+    "ramda": "^0.25.0"
   },
   "eslintConfig": {
     "root": true,
