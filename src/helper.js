@@ -1,3 +1,5 @@
+const R = require('ramda')
+
 /**
  * Encode a chapter to a batch which
  * could be insert to database.
@@ -27,4 +29,20 @@ exports.encodeChapter = (chapter, array) => {
     }
   })).concat(marks)
   return batchArray
+}
+
+/**
+ * Catch the error
+ * @method promise
+ * @param  {Function} fn  The Promise function
+ * @param  {Function}   rfn Function before resolve
+ * @return {Promise}       Return the Promise that should have no eror
+ */
+exports.promise = (fn, rfn) => {
+  rfn = rfn || (v => v)
+  return new Promise(resolve => {
+    fn
+      .then(R.compose(resolve, rfn))
+      .catch(console.error)
+  })
 }
