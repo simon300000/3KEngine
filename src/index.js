@@ -89,6 +89,15 @@ class engine {
     return this.db.get(`chapter_${chapter}`)
   }
   /**
+   * Get the location of some mark
+   * @method mark
+   * @param  {String} name Mark name
+   * @return {Promise}      Resolve the Mark location in the story
+   */
+  mark(name) {
+    return this.db.get(`mark_${name}`)
+  }
+  /**
    * Get some player data
    * @method player
    * @param  {Number}  index The id of target player
