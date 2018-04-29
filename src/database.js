@@ -38,7 +38,7 @@ class DatabaseInstance {
   constructor(name, db) {
     this.get = key => {
       return new Promise(resolve => {
-        db.get(name + '_' + key)
+        db.get(`${name}_${key}`)
           .then(value => {
             resolve(JSON.parse(value))
           })
