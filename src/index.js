@@ -46,7 +46,7 @@ class engine {
    * Put chapter in database
    * @method putChapter
    * @param  {String}   chapter Chapter name
-   * @param  {Array}    array   The array of storys in this chapter
+   * @param  {Array}    array   The array of story in this chapter
    * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
