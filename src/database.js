@@ -47,7 +47,7 @@ class DatabaseInstance {
     }
     this.put = (key, value) => {
       return new Promise(resolve => {
-        db.put(name + '_' + key, JSON.stringify(value))
+        db.put(`${name}_${key}`, JSON.stringify(value))
           .then(resolve)
           .catch(console.error)
       })
