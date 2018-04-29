@@ -1,8 +1,8 @@
 const level = require('level')
+const R = require('ramda')
+
 let databaseOpen = []
 let database = {}
-
-const R = require('ramda')
 
 const storeDatabase = (name, file) => {
   let db = level(file)
