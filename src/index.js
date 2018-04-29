@@ -1,4 +1,6 @@
 const level = require('./database')
+const R = require('ramda')
+const helper = require('./helper')
 
 /**
  * The 3KEngine
@@ -48,26 +50,7 @@ class engine {
    * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
-    let marks = []
-    let batchArray = [{
-      type: 'put',
-      key: `chapter_${chapter}`,
-      value: array.length
-    }].concat(array.map((u, index) => {
-      if (u.mark) {
-        marks.push({
-          type: 'put',
-          key: `mark_${u.mark}`,
-          value: `chapter_${chapter}_index_${index}`
-        })
-      }
-      return {
-        type: 'put',
-        key: `chapter_${chapter}_index_${index}`,
-        value: u
-      }
-    })).concat(marks)
-    return this.db.batch(batchArray)
+    return R.compose(this.db.batch, helper.encodeChapter)(chapter, array)
   }
   /**
    * Get chapter content in database
