@@ -54,7 +54,7 @@ class DatabaseInstance {
     }
     this.batch = array => {
       let batch = db.batch()
-      array.map(element => batch[element.type](element.key, element.value))
+      array.map(element => batch[element.type](`${name}_${element.key}`, JSON.stringify(element.value)))
       return new Promise(resolve => {
         batch.write()
           .then(resolve)

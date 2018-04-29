@@ -52,20 +52,20 @@ class engine {
     return this.db.batch(
       [{
         type: 'put',
-        key: `${this.name}_chapter_${chapter}`,
-        value: JSON.stringify(array.length)
+        key: `chapter_${chapter}`,
+        value: array.length
       }].concat(array.map((u, index) => {
         if (u.mark) {
           marks.push({
             type: 'put',
-            key: `${this.name}_mark_${u.mark}`,
+            key: `mark_${u.mark}`,
             value: `chapter_${chapter}_index_${index}`
           })
         }
         return {
           type: 'put',
-          key: `${this.name}_chapter_${chapter}_index_${index}`,
-          value: JSON.stringify(u)
+          key: `chapter_${chapter}_index_${index}`,
+          value: u
         }
       })).concat(marks))
   }
