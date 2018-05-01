@@ -19,7 +19,7 @@ exports.encodeChapter = (chapter, array) => {
       marks.push({
         type: 'put',
         key: `mark_${u.mark}`,
-        value: `chapter_${chapter}_index_${index}`
+        value: [chapter, index]
       })
     }
     return {
