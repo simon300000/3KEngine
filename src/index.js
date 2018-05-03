@@ -124,7 +124,7 @@ class engine {
     return this.db.put('player', playerList)
   }
   /**
-   * Return a blank index for new player
+   * Return a index that is not taken by any player
    * @method newPlayer
    * @return {Promise} Resolve a index that is not taken by any player
    */
