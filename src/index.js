@@ -22,7 +22,7 @@ class engine {
    * Link the database
    * @method init
    * @param  {String}  savefile The location of database
-   * @return {Promise}          Resolve the database version
+   * @return {Promise}          Resolve the database version after initialize
    */
   async init(savefile) {
     this.db = await level(this.name, savefile)
@@ -131,9 +131,7 @@ class engine {
   async newPlayer() {
     let playerList = await this.db.get('player')
     for (let i = 0; i < playerList.length; i++) {
-      if (!playerList[i]) {
-        return i
-      }
+      if (!playerList[i]) return i
     }
     return playerList.length
   }
