@@ -74,7 +74,7 @@ class engine {
   /**
    * Get the location of some mark
    * @method mark
-   * @param  {String} name Mark name
+   * @param  {String} name  Mark name
    * @return {Promise}      Resolve the Mark location as a Array: [chapter, index]
    */
   mark(name) {
