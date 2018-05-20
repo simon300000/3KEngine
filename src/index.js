@@ -16,6 +16,7 @@ class engine {
    */
   constructor(name) {
     this.name = name
+    this.ready = false
     this.currentPlayer = undefined
   }
   /**
@@ -26,6 +27,7 @@ class engine {
    */
   async init(savefile) {
     this.db = await level(this.name, savefile)
+    this.ready = true
     return this.db.get('version')
   }
   /**

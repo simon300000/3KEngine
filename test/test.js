@@ -20,13 +20,23 @@ describe('Basic', function() {
     it('Module should output a function', function() {
       assert.equal(typeof Engine, 'function')
     })
-    it('Able to new Engine() with version 0', async function() {
+    it('Able to new Engine()', function() {
       story = new Engine('myStory')
-      let version = await story.init('./save')
-      assert.equal(version, 0)
     })
     it('Which should be object', function() {
       assert.equal(typeof story, 'object')
+    })
+    it('And not ready', function() {
+      let ready = story.ready
+      assert.equal(ready, false)
+    })
+    it('And database version 0', async function() {
+      let version = await story.init('./save')
+      assert.equal(version, 0)
+    })
+    it('And it is ready', function() {
+      let ready = story.ready
+      assert.equal(ready, true)
     })
     it('Name of story is what I put in', function() {
       assert.equal(story.name, 'myStory')
