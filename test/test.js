@@ -28,7 +28,7 @@ describe('Basic', function() {
     it('Which should be object', function() {
       assert.equal(typeof story, 'object')
     })
-    it('Name of story is what I put in', async function() {
+    it('Name of story is what I put in', function() {
       assert.equal(story.name, 'myStory')
     })
   })
