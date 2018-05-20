@@ -59,6 +59,8 @@ describe('Story', function() {
     }, {
       Andrew: 'My name is Andrew.'
     }, {
+      mark: 'hello'
+    }, {
       Simon: 'Nice to meet you.'
     }, {
       Andrew: 'Nice to meet you too.'
@@ -66,11 +68,16 @@ describe('Story', function() {
   })
   it('And we could get the correct chapter menu', async function() {
     let menu = await story.chapters('one')
-    assert.equal(menu, 4)
+    assert.equal(menu, 5)
   })
   it('And we could get the corrct chapter based on index', async function() {
     let content = await story.chapter('one', 1)
     assert.equal(content.Andrew, 'My name is Andrew.')
+  })
+  it('We could find the mark "hello"', async function() {
+    let mark = await story.mark('hello')
+    assert.equal(mark[0], 'one')
+    assert.equal(mark[1], 2)
   })
 })
 

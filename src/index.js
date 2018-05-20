@@ -1,8 +1,13 @@
 const level = require('./database')
+const R = require('ramda')
+const helper = require('./helper')
 
 /**
  * The 3KEngine
  */
+
+// TODO: The next() script and all related
+
 class engine {
   /**
    * Create a new engine instance
@@ -11,12 +16,13 @@ class engine {
    */
   constructor(name) {
     this.name = name
+    this.currentPlayer = undefined
   }
   /**
    * Link the database
    * @method init
    * @param  {String}  savefile The location of database
-   * @return {Promise}          Resolve the database version
+   * @return {Promise}          Resolve the database version after initialize
    */
   async init(savefile) {
     this.db = await level(this.name, savefile)
@@ -40,22 +46,11 @@ class engine {
    * Put chapter in database
    * @method putChapter
    * @param  {String}   chapter Chapter name
-   * @param  {Array}    array   The array of storys in this chapter
+   * @param  {Array}    array   The array of story in this chapter
    * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
-    return this.db.batch(
-      [{
-        type: 'put',
-        key: `${this.name}_chapter_${chapter}`,
-        value: JSON.stringify(array.length)
-      }].concat(array.map((u, index) => {
-        return {
-          type: 'put',
-          key: `${this.name}_chapter_${chapter}_${index}`,
-          value: JSON.stringify(u)
-        }
-      })))
+    return R.compose(this.db.batch, helper.encodeChapter)(chapter, array)
   }
   /**
    * Get chapter content in database
@@ -65,7 +60,7 @@ class engine {
    * @return {Promise}          Resolve the target content
    */
   chapter(chapter, index) {
-    return this.db.get(`chapter_${chapter}_${index}`)
+    return this.db.get(`chapter_${chapter}_index_${index}`)
   }
   /**
    * Get target chapter's length
@@ -75,6 +70,15 @@ class engine {
    */
   chapters(chapter) {
     return this.db.get(`chapter_${chapter}`)
+  }
+  /**
+   * Get the location of some mark
+   * @method mark
+   * @param  {String} name  Mark name
+   * @return {Promise}      Resolve the Mark location as a Array: [chapter, index]
+   */
+  mark(name) {
+    return this.db.get(`mark_${name}`)
   }
   /**
    * Get some player data
@@ -120,16 +124,14 @@ class engine {
     return this.db.put('player', playerList)
   }
   /**
-   * Return a blank index for new player
+   * Return a index that is not taken by any player
    * @method newPlayer
    * @return {Promise} Resolve a index that is not taken by any player
    */
   async newPlayer() {
     let playerList = await this.db.get('player')
     for (let i = 0; i < playerList.length; i++) {
-      if (!playerList[i]) {
-        return i
-      }
+      if (!playerList[i]) return i
     }
     return playerList.length
   }

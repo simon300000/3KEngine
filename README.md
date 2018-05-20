@@ -1,4 +1,8 @@
-# 3KEngine [![Build Status](https://travis-ci.org/simon300000/3KEngine.svg?branch=develop)](https://travis-ci.org/simon300000/3KEngine) [![Build status](https://ci.appveyor.com/api/projects/status/9gm2bnt0ug1xddfa/branch/develop?svg=true)](https://ci.appveyor.com/project/simon300000/3kengine/branch/develop) [![Coverage Status](https://coveralls.io/repos/github/simon300000/3KEngine/badge.svg?branch=develop)](https://coveralls.io/github/simon300000/3KEngine?branch=develop) [![dependencies Status](https://david-dm.org/simon300000/3kengine/status.svg)](https://david-dm.org/simon300000/3kengine) [![devDependencies Status](https://david-dm.org/simon300000/3kengine/dev-status.svg)](https://david-dm.org/simon300000/3kengine?type=dev)
+# 3KEngine [![npm](https://img.shields.io/npm/v/3kengine.svg)](https://www.npmjs.com/package/3kengine) [![taobao](https://npm.taobao.org/badge/v/3kengine.svg)](https://npm.taobao.org/package/3kengine)
+
+[![Build Status](https://img.shields.io/travis/simon300000/3KEngine/develop.svg)](https://travis-ci.org/simon300000/3KEngine) [![Build status](https://img.shields.io/appveyor/ci/simon300000/3KEngine/develop.svg)](https://ci.appveyor.com/project/simon300000/3kengine/branch/develop) [![Coverage Status](https://img.shields.io/coveralls/github/simon300000/3KEngine/develop.svg)](https://coveralls.io/github/simon300000/3KEngine?branch=develop)
+
+[![dependencies Status](https://img.shields.io/david/simon300000/3KEngine.svg)](https://david-dm.org/simon300000/3kengine) [![devDependencies Status](https://img.shields.io/david/dev/simon300000/3KEngine.svg)](https://david-dm.org/simon300000/3kengine?type=dev)
 
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/simon300000/3KEngine.svg?columns=all)](https://waffle.io/simon300000/3KEngine)
 

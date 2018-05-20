@@ -1,4 +1,6 @@
 const level = require('level')
+const helper = require('./helper')
+
 let databaseOpen = []
 let database = {}
 
@@ -36,28 +38,12 @@ const initDatabase = (name, db) => {
 
 class DatabaseInstance {
   constructor(name, db) {
-    this.get = key => {
-      return new Promise(resolve => {
-        db.get(name + '_' + key)
-          .then(value => {
-            resolve(JSON.parse(value))
-          })
-          .catch(console.error)
-      })
-    }
-    this.put = (key, value) => {
-      return new Promise(resolve => {
-        db.put(name + '_' + key, JSON.stringify(value))
-          .then(resolve)
-          .catch(console.error)
-      })
-    }
+    this.get = key => helper.promise(db.get(`${name}_${key}`), JSON.parse)
+    this.put = (key, value) => helper.promise(db.put(`${name}_${key}`, JSON.stringify(value)))
     this.batch = array => {
-      return new Promise(resolve => {
-        db.batch(array)
-          .then(resolve)
-          .catch(console.error)
-      })
+      let batch = db.batch()
+      array.map(element => batch[element.type](`${name}_${element.key}`, JSON.stringify(element.value)))
+      return helper.promise(batch.write())
     }
     this.db = db
   }
