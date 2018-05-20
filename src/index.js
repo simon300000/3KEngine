@@ -31,6 +31,14 @@ class engine {
     return this.db.get('version')
   }
   /**
+   * Close Database
+   * @method close
+   * @return {Promise} Resolve when database is closed
+   */
+  close() {
+    return this.db.db.close()
+  }
+  /**
    * Return current database version if v is undefined,
    * Modify current database version to v if v is defined
    * @method version

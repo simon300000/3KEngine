@@ -150,3 +150,15 @@ describe('Config', function() {
     assert.equal(newConfig.os, "macOS")
   })
 })
+
+describe('Say goodbye', function() {
+  it('Database is open', function() {
+    let isOpen = story.db.db.isOpen()
+    assert.equal(isOpen, true)
+  })
+  it('Now I close it', async function() {
+    await story.close()
+    let isClosed = story.db.db.isClosed()
+    assert.equal(isClosed, true)
+  })
+})
