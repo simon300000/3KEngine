@@ -1,12 +1,9 @@
 const level = require('./database')
-const R = require('ramda')
 const helper = require('./helper')
 
 /**
  * The 3KEngine
  */
-
-// TODO: The next() script and all related
 
 class engine {
   /**
@@ -16,6 +13,7 @@ class engine {
    */
   constructor(name) {
     this.name = name
+    this.ready = false
     this.currentPlayer = undefined
   }
   /**
@@ -26,7 +24,16 @@ class engine {
    */
   async init(savefile) {
     this.db = await level(this.name, savefile)
+    this.ready = true
     return this.db.get('version')
+  }
+  /**
+   * Close Database
+   * @method close
+   * @return {Promise} Resolve when database is closed
+   */
+  close() {
+    return this.db.db.close()
   }
   /**
    * Return current database version if v is undefined,
@@ -50,7 +57,7 @@ class engine {
    * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
-    return R.compose(this.db.batch, helper.encodeChapter)(chapter, array)
+    return this.db.batch(helper.encodeChapter(chapter, array))
   }
   /**
    * Get chapter content in database

@@ -1,11 +1,10 @@
 const level = require('level')
-const helper = require('./helper')
 
 let databaseOpen = []
 let database = {}
 
 const storeDatabase = (name, file) => {
-  let db = level(file)
+  let db = level(file, { valueEncoding: 'json' })
   databaseOpen.push(file)
   database[file] = db
   return openDatabase(name, db)
@@ -23,9 +22,9 @@ const initDatabase = (name, db) => {
       .catch(e => {
         if (e.notFound) {
           db.batch()
-            .put(`${name}_version`, JSON.stringify(0))
-            .put(`${name}_player`, JSON.stringify([]))
-            .put(`${name}_config`, JSON.stringify({}))
+            .put(`${name}_version`, 0)
+            .put(`${name}_player`, [])
+            .put(`${name}_config`, {})
             .write()
             .then(resolve)
             .catch(console.error)
@@ -38,12 +37,12 @@ const initDatabase = (name, db) => {
 
 class DatabaseInstance {
   constructor(name, db) {
-    this.get = key => helper.promise(db.get(`${name}_${key}`), JSON.parse)
-    this.put = (key, value) => helper.promise(db.put(`${name}_${key}`, JSON.stringify(value)))
+    this.get = key => db.get(`${name}_${key}`)
+    this.put = (key, value) => db.put(`${name}_${key}`, value)
     this.batch = array => {
       let batch = db.batch()
-      array.map(element => batch[element.type](`${name}_${element.key}`, JSON.stringify(element.value)))
-      return helper.promise(batch.write())
+      array.map(element => batch[element.type](`${name}_${element.key}`, element.value))
+      return batch.write()
     }
     this.db = db
   }
