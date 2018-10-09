@@ -1,5 +1,4 @@
 const level = require('./database')
-const R = require('ramda')
 const helper = require('./helper')
 
 /**
@@ -58,7 +57,7 @@ class engine {
    * @return {Promise}          Resolve when finnshed
    */
   putChapter(chapter, array) {
-    return R.compose(this.db.batch, helper.encodeChapter)(chapter, array)
+    return this.db.batch(helper.encodeChapter(chapter, array))
   }
   /**
    * Get chapter content in database
