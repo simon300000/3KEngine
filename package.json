@@ -34,7 +34,7 @@
     "nyc": "^13.3.0"
   },
   "dependencies": {
-    "level": "^4.0.0"
+    "level": "^5.0.1"
   },
   "eslintConfig": {
     "root": true,
