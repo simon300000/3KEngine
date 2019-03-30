@@ -4,7 +4,7 @@
 
 [![dependencies Status](https://img.shields.io/david/simon300000/3KEngine.svg)](https://david-dm.org/simon300000/3kengine) [![devDependencies Status](https://img.shields.io/david/dev/simon300000/3KEngine.svg)](https://david-dm.org/simon300000/3kengine?type=dev)
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/simon300000/3KEngine.svg?columns=all)](https://waffle.io/simon300000/3KEngine) [![Greenkeeper badge](https://badges.greenkeeper.io/simon300000/3KEngine.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/simon300000/3KEngine.svg)](https://greenkeeper.io/)
 
 This is 3KEngine
 
