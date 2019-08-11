@@ -6,7 +6,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/simon300000/3KEngine.svg)](https://greenkeeper.io/)
 
-This is 3KEngine
+This is 3KEngine. Primary used for the (previous) Computer Club Project. Read JS files in src for more detail.
 
 ## Contributing
 
