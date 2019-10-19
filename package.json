@@ -35,7 +35,7 @@
     "yarn": "^1.19.1"
   },
   "dependencies": {
-    "level": "^5.0.1"
+    "level": "^6.0.0"
   },
   "eslintConfig": {
     "root": true,
